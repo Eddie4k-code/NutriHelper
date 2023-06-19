@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\backend\\graphql",
-    "\\backend\\graphql\\resolvers",
-    "\\backend\\model"
+    "\\backend\\graphql\\resolvers"
   ],
-  "SelectedNode": "\\backend\\graphql\\recipe.schema.ts",
+  "SelectedNode": "\\backend\\errors",
   "PreviewInSolutionExplorer": false
 }

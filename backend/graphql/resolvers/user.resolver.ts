@@ -100,7 +100,12 @@ export class UserResolver {
     }
 
 
-
+    /*
+   *
+   *
+   * Save a recipe to a users collection of recipes.
+   *
+   */
     @Mutation(() => User)
     async addRecipe(@Arg('userId') id: string, @Arg('recipeId') recipeId: string) {
 
