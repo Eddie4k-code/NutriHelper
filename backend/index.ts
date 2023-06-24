@@ -7,6 +7,7 @@ import cookieSession = require('cookie-session');
 import mongoose from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
 import cookieParser = require('cookie-parser');
+import { RecipeResolver } from './graphql/resolvers/recipe.resolver';
 const express = require("express");
 const dotenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -27,7 +28,7 @@ async function main() {
 
     //Build Schemas from GraphQL
     const schema = await buildSchema({
-        resolvers: [UserResolver],
+        resolvers: [UserResolver, RecipeResolver],
         globalMiddlewares: []
     });
 

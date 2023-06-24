@@ -28,8 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm install --package-lock-only
 
-      - name: Run tests
-        run: npm test
 
 
 

@@ -8,10 +8,11 @@ const bcrypt = require("bcryptjs");
 import { Request, Response, NextFunction } from 'express';
 import { Recipe } from "../recipe.schema";
 import { verifyJwt } from "../middleware/verifyToken";
+import { BadRequestError } from '../../errors/bad-request-error';
 
 
 
-// Resolvers for User Schema
+// Resolvers for Recipe Schema
 
 
 //Represents the context object passed to the resolvers 
@@ -57,6 +58,12 @@ export class UserResolver {
     @UseMiddleware(verifyJwt)
     async user(@Arg('id') id: string, @Ctx() ctx: ApiContext) {
         const user = await UserModel.findById(id);
+   
+
+        //Check if user exists
+        if (!user) {
+            throw new BadRequestError("User does Not Exist!");
+        }
 
         return user;
     }
@@ -76,8 +83,20 @@ export class UserResolver {
         @Ctx() ctx: ApiContext
     ) {
 
+
+
         //Get Request and Response from context.
         const { req, res } = ctx;
+
+        //Check if user with email already exists
+        const existingUser = await UserModel.findOne({ email: email });
+
+        console.log(existingUser);
+
+        if (existingUser) {
+            throw new BadRequestError('User already exists!');
+        }
+
 
         // Generate Salt
         const salt: Promise<string> = await bcrypt.genSalt(10);
@@ -100,27 +119,7 @@ export class UserResolver {
     }
 
 
-    /*
-   *
-   *
-   * Save a recipe to a users collection of recipes.
-   *
-   */
-    @Mutation(() => User)
-    async addRecipe(@Arg('userId') id: string, @Arg('recipeId') recipeId: string) {
 
-        const user = await UserModel.findById(id);
 
-        if (user) {
-            user.recipes.push(recipeId);
-            await user.save();
-        }
-
-       
-
-        return user;
-
-     
-    }
    
 }

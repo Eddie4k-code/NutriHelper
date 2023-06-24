@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backend",
-    "\\backend\\graphql\\resolvers"
+    "\\backend"
   ],
-  "SelectedNode": "\\backend\\errors",
+  "SelectedNode": "\\backend\\.env",
   "PreviewInSolutionExplorer": false
 }

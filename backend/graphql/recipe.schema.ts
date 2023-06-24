@@ -1,4 +1,4 @@
-import { ObjectType, ID, Field} from "type-graphql";
+import { ObjectType, ID, Field, UseMiddleware} from "type-graphql";
 
 /* Recipe Schema */
 
