@@ -119,6 +119,38 @@ export class UserResolver {
     }
 
 
+    @Mutation(() => User) 
+    async userLogin(@Arg('email') email: string, @Arg('password') password: string, @Ctx() ctx: ApiContext) {
+        const {req, res} = ctx;
+
+        const user = await UserModel.findOne({email: email});
+
+        //Check if user exists
+        if (!user) {
+            throw new BadRequestError('User Does not Exist!');
+        }
+
+        //Check if password meets the hashed password.
+        const isValid = await bcrypt.compare(password, user.password);
+
+
+        if (!isValid) {
+            throw new BadRequestError('Email or Password incorrect!');
+        }
+
+        //Generate JSONWebToken
+
+        const userJwt = jwt.sign({id: user._id, email:user.email}, process.env.JWT_SECRET);
+
+        res.cookie('jwt', userJwt, {secure: true});
+
+
+        return user;
+
+
+    }
+
+
 
 
    
