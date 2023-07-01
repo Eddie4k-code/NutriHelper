@@ -118,7 +118,12 @@ export class UserResolver {
         return newUser;
     }
 
-
+    /* 
+     * 
+     * 
+     * User Login
+     * 
+     */
     @Mutation(() => User) 
     async userLogin(@Arg('email') email: string, @Arg('password') password: string, @Ctx() ctx: ApiContext) {
         const {req, res} = ctx;
@@ -141,7 +146,8 @@ export class UserResolver {
         //Generate JSONWebToken
 
         const userJwt = jwt.sign({id: user._id, email:user.email}, process.env.JWT_SECRET);
-
+        
+        //Assign JWT To Cookie
         res.cookie('jwt', userJwt, {secure: true});
 
 

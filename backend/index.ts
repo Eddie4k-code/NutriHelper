@@ -11,6 +11,7 @@ import { RecipeResolver } from './graphql/resolvers/recipe.resolver';
 const express = require("express");
 const dotenv = require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 
 //Represents the context object passed to the resolvers 
@@ -38,8 +39,8 @@ async function main() {
    
 
     //Express App
-    app.listen(3000, () => {
-        console.log('Connected on port 3000, backend');
+    app.listen(4000, () => {
+        console.log('Connected on port 4000, backend');
     });
 
     //Connect to Mongoose Database
@@ -50,7 +51,7 @@ async function main() {
 
     //Middleware
     app.use(cookieParser());
-
+    app.use(cors());
     // GraphQL
     app.use('/graphql', graphqlHTTP((req, res) => ({
         schema,

@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backend"
+    "\\backend\\graphql\\middleware",
+    "\\backend\\graphql\\resolvers",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\hooks",
+    "\\frontend\\src\\mutations"
   ],
-  "SelectedNode": "\\backend\\.env",
+  "SelectedNode": "\\frontend\\src\\hooks\\useRegister.tsx",
   "PreviewInSolutionExplorer": false
 }
