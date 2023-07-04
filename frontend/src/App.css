@@ -113,3 +113,39 @@ h1 {
     text-align: center;
 }
 
+/* Landing */
+.recipe-search-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.recipe-main-search {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.recipe-main-search-btn {
+  padding: 10px 20px;
+  margin-left: 1rem;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Add responsive styles here */
+@media (max-width: 600px) {
+  .recipe-search-page {
+    padding: 10px;
+  }
+}
+
