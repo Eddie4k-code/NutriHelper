@@ -16,8 +16,9 @@ const Nav = () => {
 
             <ul className="nav-list">
                 <li className="nav-item">Search</li>
-                <li className="nav-item">Login</li>
-                <li className="nav-item">Register</li>
+                {user && <li className="nav-item">Logout</li>}
+                {!user && <li className="nav-item">Login</li>}
+                {!user &&<li className="nav-item">Register</li>}
 
             </ul>
 

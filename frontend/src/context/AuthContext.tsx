@@ -26,7 +26,6 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     const [user, setUser] = useState<{id: string, email: string} | null>(null);
     const {checkCurrentUser} = useCheckUser();
 
-
     //Sets the user state to the current user logging in.
     const authContextLogin = (id:string, email: string) => {
         const currentUser = {id, email};
@@ -51,7 +50,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
                 console.log('logged in');
             } else {
                 logout();
-                console.log('Not Logged in')
+                console.log('Not Logged in');
             }
 
         }
