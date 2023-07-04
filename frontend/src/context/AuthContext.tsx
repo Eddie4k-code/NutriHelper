@@ -1,4 +1,6 @@
 import React, {useState, createContext, useEffect, useContext} from 'react';
+import useCheckUser from '../hooks/useCheckUser';
+
  
 //Structure of AuthContext
 interface AuthContextValue {
@@ -22,6 +24,7 @@ export interface AuthContextProviderProps {
 //AuthProvider component to wrap around other components at the higher level.
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     const [user, setUser] = useState<{id: string, email: string} | null>(null);
+    const {checkCurrentUser} = useCheckUser();
 
 
     //Sets the user state to the current user logging in.
@@ -35,6 +38,30 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     const logout = () => {
         setUser(null);
     }
+
+
+    useEffect(() => {
+        //Retireves current user information to keep the auth context state persistent
+        const fetchCurrentUser = async () => {
+            const data = await checkCurrentUser();
+
+            if (data && data.data.checkCurrentUser) {
+                const {id, email} = data.data.checkCurrentUser;
+                authContextLogin(id, email);
+                console.log('logged in');
+            } else {
+                logout();
+                console.log('Not Logged in')
+            }
+
+        }
+
+        fetchCurrentUser();
+
+    }, []);
+
+    
+
 
     return(
     <AuthContext.Provider value={{user, authContextLogin, logout}}>

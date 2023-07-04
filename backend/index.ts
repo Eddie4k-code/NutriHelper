@@ -50,12 +50,18 @@ async function main() {
         .catch((error) => console.error('DB CONNECTION ERROR:', error));
 
     //Middleware
+
     app.use(cookieParser());
-    app.use(cors());
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        credentials: true, // Allow credentials (cookies)
+      }));
+
     // GraphQL
     app.use('/graphql', graphqlHTTP((req, res) => ({
         schema,
         graphiql: true,
+        credentials: true,
         context: {req, res}
     })));
 

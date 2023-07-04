@@ -148,11 +148,21 @@ export class UserResolver {
         const userJwt = jwt.sign({id: user._id, email:user.email}, process.env.JWT_SECRET);
         
         //Assign JWT To Cookie
-        res.cookie('jwt', userJwt, {secure: true});
-
+        res.cookie('jwt', userJwt, {secure: true, httpOnly: true});
 
         return user;
 
+
+    }
+
+    /* Checks current user info */
+    @Query(() => User)
+    @UseMiddleware(verifyJwt) 
+    async checkCurrentUser(@Ctx() ctx: ApiContext) {
+        const user = await UserModel.findById(ctx.currentUser.id);
+
+
+        return user;
 
     }
 

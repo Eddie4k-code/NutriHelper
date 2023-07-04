@@ -1,15 +1,16 @@
 import { useState } from "react";
 import axios from 'axios';
-import { REGISTER } from "../mutations/mutations";
+import { checkCurrentUserQuery } from "../queries/queries";
 
-/* Custom Hook for Registering Users*/
 
-const useRegister = () => {
+//Checks current user information (used in auth context to provide a way to keep user data peristent)
+
+const useCheckUser = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
 
-    const register = async (email: string, password: string, onSuccess: () => void) => {
+    const checkCurrentUser = async () => {
 
         setIsLoading(true);
         setError('');
@@ -18,8 +19,7 @@ const useRegister = () => {
             const response = await axios.post(
                 'http://localhost:4000/graphql',
                 {
-                    query: REGISTER.loc!.source.body,
-                    variables: { email, password }
+                    query: checkCurrentUserQuery.loc!.source.body,
                 },
                 {
                     headers: {
@@ -29,7 +29,10 @@ const useRegister = () => {
                 }
             );
 
-            await onSuccess();
+
+            return response.data;
+
+          
         } catch (err: any) {
             setError(err.response.data.errors[0].message);
         }
@@ -39,9 +42,9 @@ const useRegister = () => {
     }
 
 
-    return {register, isLoading, error}
+    return {checkCurrentUser, isLoading, error}
 
 }
 
 
-export default useRegister;
+export default useCheckUser;

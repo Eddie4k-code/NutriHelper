@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const Nav = () => {
+
+    const {user} = useAuthContext();
+
+
     return (
         <nav className="navbar">
 

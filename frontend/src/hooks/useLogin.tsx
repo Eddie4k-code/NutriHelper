@@ -24,10 +24,11 @@ const useLogin = () => {
                 {
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    withCredentials: true
                 }
             );
-
+                    
             onSuccess(response.data.data.userLogin);
         } catch (err: any) {
             setError(err.response.data.errors[0].message);
