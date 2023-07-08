@@ -16,6 +16,15 @@ const useFindRecipe = () => {
         setIsLoading(true);
         setError('');
 
+        //If there is a cached result we will use that instead of wasting an api request.
+        if (localStorage.getItem(`${query}`)) {
+          const foundCachedItem = localStorage.getItem(`${query}`);
+          onSuccess(JSON.parse(foundCachedItem!));
+          setIsLoading(false);
+
+          return JSON.parse(foundCachedItem!);
+        }
+
         //Get Recipe Information such as id, image, url.
         const searchOptions = {
           method: 'GET',
@@ -64,6 +73,9 @@ const useFindRecipe = () => {
 
             const recipesWithDetails = await Promise.all(recipePromises);
             onSuccess(recipesWithDetails);
+
+            //Cache Result in Local Storage!
+            localStorage.setItem(`${query}`, JSON.stringify(recipesWithDetails));
             setIsLoading(false);
 
           } catch (error) {

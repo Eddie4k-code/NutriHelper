@@ -14,11 +14,14 @@ export interface RecipeDetails {
 
 
 const Landing = () => {
+  //Custom hook that makes api request tro fetch recipes based on query.
   const {findRecipe, isLoading, error} = useFindRecipe();
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const [recipes, setRecipes] = useState<RecipeDetails[]>([]);
 
+  //Handles recipe search functionality on client.
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     findRecipe(searchQuery, (data) => setRecipes(data));
@@ -40,7 +43,7 @@ const Landing = () => {
 
 
       {
-
+        /* Conditionally Render Recipes based on loading*/
        isLoading ? (<p>Loading Recipes...</p>) : (<RecipeList recipes={recipes} />)
 
       }
