@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
+import useFindRecipe from '../hooks/useFindRecipe';
+import RecipeList from '../components/RecipeList';
+
+//Structure of Recipe
+export interface RecipeDetails {
+  id: number,
+  title: string,
+  image: string,
+  ingredients: any,
+  summary: string,
+  analyzedInstructions: any
+}
+
 
 const Landing = () => {
+  const {findRecipe, isLoading, error} = useFindRecipe();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = () => {
-    // Implement your search logic here
-    // You can make an API call to retrieve recipes based on the searchQuery
+  const [recipes, setRecipes] = useState<RecipeDetails[]>([]);
+
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    findRecipe(searchQuery, (data) => setRecipes(data));
   };
 
   return (
@@ -21,7 +37,13 @@ const Landing = () => {
         />
         <button className="recipe-main-search-btn" onClick={handleSearch}>Search</button>
       </div>
-      {/* Display the search results here */}
+
+
+      {
+
+       isLoading ? (<p>Loading Recipes...</p>) : (<RecipeList recipes={recipes} />)
+
+      }
     </div>
   );
 };
