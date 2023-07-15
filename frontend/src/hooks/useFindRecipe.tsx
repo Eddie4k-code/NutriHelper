@@ -17,8 +17,8 @@ const useFindRecipe = () => {
         setError('');
 
         //If there is a cached result we will use that instead of wasting an api request.
-        if (localStorage.getItem(`${query}`)) {
-          const foundCachedItem = localStorage.getItem(`${query}`);
+        if (sessionStorage.getItem(`${query}`)) {
+          const foundCachedItem = sessionStorage.getItem(`${query}`);
           onSuccess(JSON.parse(foundCachedItem!));
           setIsLoading(false);
 
@@ -74,8 +74,8 @@ const useFindRecipe = () => {
             const recipesWithDetails = await Promise.all(recipePromises);
             onSuccess(recipesWithDetails);
 
-            //Cache Result in Local Storage!
-            localStorage.setItem(`${query}`, JSON.stringify(recipesWithDetails));
+            //Cache Result in session Storage!
+            sessionStorage.setItem(`${query}`, JSON.stringify(recipesWithDetails));
             setIsLoading(false);
 
           } catch (error) {

@@ -1,17 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import { RecipeDetails } from "../pages/Landing";
 
 //Structure of Recipe List Props
 interface RecipeListProps {
     recipes: RecipeDetails[]
 }
-//Sets selected item in localStorage, so that way we dont need to waste an additional api request.
-const handleViewDetails = (e:React.MouseEvent<HTMLButtonElement>, item: RecipeDetails) => {
-  e.preventDefault();
-  localStorage.setItem('selectedItem', JSON.stringify(item));
-}
+
 
 
 const RecipeList = ({recipes}: RecipeListProps) => {
+
+  const navigate = useNavigate();
+
+    //Sets selected item in session storage, so that way we dont need to waste an additional api request.
+  const handleViewDetails = (e:React.MouseEvent<HTMLButtonElement>, item: RecipeDetails) => {
+    e.preventDefault();
+    sessionStorage.setItem('selectedItem', JSON.stringify(item));
+    navigate('/test'); //Change Later this redirects to Recipe Details test if selected item works
+  }
+
+
 
 
     return (

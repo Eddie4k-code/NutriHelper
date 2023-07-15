@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useFindRecipe from '../hooks/useFindRecipe';
 import RecipeList from '../components/RecipeList';
+
 
 //Structure of Recipe
 export interface RecipeDetails {
@@ -16,6 +17,7 @@ export interface RecipeDetails {
 const Landing = () => {
   //Custom hook that makes api request tro fetch recipes based on query.
   const {findRecipe, isLoading, error} = useFindRecipe();
+  
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -26,6 +28,7 @@ const Landing = () => {
     e.preventDefault();
     findRecipe(searchQuery, (data) => setRecipes(data));
   };
+
 
   return (
     <div className="recipe-search-page">

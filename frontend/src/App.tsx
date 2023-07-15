@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import { AuthContextProvider } from './context/AuthContext';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<Landing />} />
+                    <Route path="/test" element={<RecipeDetails />} />
                 </Routes>
                 </BrowserRouter>
             </AuthContextProvider>

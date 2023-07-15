@@ -191,3 +191,120 @@ h1 {
   background-color: #0056b3;
 }
 
+/* Recipe Details */
+.recipe-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.recipe-details-container h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.recipe-image img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.recipe-summary {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.recipe-ingredients {
+  margin-bottom: 30px;
+}
+
+.recipe-ingredients h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.recipe-ingredients ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-ingredients li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.recipe-ingredients li::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #666666;
+  margin-right: 10px;
+}
+
+.recipe-instructions {
+  margin-bottom: 30px;
+}
+
+.recipe-instructions h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.recipe-instructions .instruction-step {
+  margin-bottom: 20px;
+}
+
+.recipe-instructions .instruction-step p:first-child {
+  font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .recipe-details-container {
+    padding: 20px;
+  }
+
+  .recipe-details-container h2 {
+    font-size: 28px;
+  }
+
+  .recipe-summary {
+    font-size: 16px;
+  }
+
+  .recipe-ingredients h3,
+  .recipe-instructions h3 {
+    font-size: 20px;
+  }
+}
+
+.add-to-favorites-button {
+  display: inline-block;
+  background-color:  #45a049;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-favorites-button:hover {
+  background-color: #45a049
+}
+
