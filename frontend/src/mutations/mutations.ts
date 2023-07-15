@@ -14,7 +14,7 @@ export const REGISTER = gql`
 `;
 
 
-//Login Mutation Mutation
+//Login Mutation 
 export const LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
     userLogin(email: $email, password: $password) {
@@ -22,6 +22,18 @@ export const LOGIN = gql`
     }
   }
 `;
+
+
+//Add Recipe to users favorites Mutation
+//Login Mutation 
+export const ADD_RECIPE_TO_FAVORITES = gql`
+  mutation addRecipe($recipeId:Float!, $userId: String!) {
+    addRecipe(recipeId: $recipeId, userId: $userId) {
+      recipeId
+    }
+  }
+`;
+
 
 
 

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import useAddToFavorites from "../hooks/useAddToFavorites";
 
 
 
@@ -19,6 +21,10 @@ const RecipeDetails = () => {
     const [recipe, setRecipe] = useState<RecipeDetails | null>(null);
 
 
+    const {user} = useAuthContext();
+    const {addToFavorites} = useAddToFavorites();
+
+
     //On first render localStorage is checked for the recipe the user selected to view details for.
     useEffect(() => {
 
@@ -30,10 +36,13 @@ const RecipeDetails = () => {
 
     }, [])
 
+    
     const handleAddToFavorites = () => {
-        // Add your logic for adding the recipe to favorites
-        // This is just a placeholder function
+        if (user) {
+          addToFavorites(recipe!.id, user.id);
+        }
         console.log('Recipe added to favorites!');
+        console.log(user);
       };
 
     return (

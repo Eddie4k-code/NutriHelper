@@ -28,7 +28,7 @@ export class RecipeResolver {
    */
     @Mutation(() => Recipe)
     @UseMiddleware(verifyJwt)
-    async addRecipe(@Arg('userId') id: string, @Arg('recipeId') recipeId: string) {
+    async addRecipe(@Arg('userId') id: string, @Arg('recipeId') recipeId: number) {
 
         //Find the user to add the recipe too.
         const user = await UserModel.findById(id);
@@ -56,7 +56,7 @@ export class RecipeResolver {
     */
     @Mutation(() => Recipe)
     @UseMiddleware(verifyJwt)
-    async deleteRecipe(@Arg('userId') userId: string, @Arg('recipeId') recipeId: string, @Ctx() ctx: ApiContext) {
+    async deleteRecipe(@Arg('userId') userId: string, @Arg('recipeId') recipeId: number, @Ctx() ctx: ApiContext) {
         //Find the user to delete the recipe from.
         const user = await UserModel.findById(userId);
         

@@ -5,5 +5,5 @@ import { ObjectType, ID, Field, UseMiddleware} from "type-graphql";
 @ObjectType()
 export class Recipe {
     @Field(() => ID)
-    recipeId!: string
+    recipeId!: number
 }
