@@ -37,6 +37,15 @@ export class RecipeResolver {
             throw new BadRequestError("User Does not Exist!");
         }
 
+        //Find the index of the recipe
+        const recipeIndex = user.recipes.indexOf(recipeId);
+
+
+        //If it exists then we dont need to add it again :)
+        if (recipeIndex !== -1) {
+            throw new BadRequestError('User already has that recipe in favorites.');
+        }
+
 
         user.recipes.push(recipeId);
         await user.save();
@@ -89,6 +98,20 @@ export class RecipeResolver {
             recipeId
         }
         
+
+    }
+
+
+    @Query(() => Boolean)
+    async isRecipeInFavorites(@Arg('userId') userId: string, @Arg('recipeId') recipeId: string) {
+        const user = await UserModel.findById(userId);
+
+        if (!user) {
+            throw new BadRequestError('User Does not Exist');
+        }
+
+
+        return user.recipes.includes(parseInt(recipeId));
 
     }
 
