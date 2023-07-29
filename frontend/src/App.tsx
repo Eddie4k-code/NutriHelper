@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { AuthContextProvider } from './context/AuthContext';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipeSearchResults from './pages/RecipeSearchResults';
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/" element={<Landing />} />
                     <Route path="/test" element={<RecipeDetails />} />
+                    <Route path="/search" element={<Landing />} />
+                    <Route path="/search/:query" element={<Landing />} />
                 </Routes>
                 </BrowserRouter>
             </AuthContextProvider>

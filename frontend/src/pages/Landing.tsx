@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useFindRecipe from '../hooks/useFindRecipe';
 import RecipeList from '../components/RecipeList';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 //Structure of Recipe
@@ -17,23 +18,34 @@ export interface RecipeDetails {
 const Landing = () => {
   //Custom hook that makes api request tro fetch recipes based on query.
   const {findRecipe, isLoading, error} = useFindRecipe();
+
+  const navigate = useNavigate();
   
+  const params = useParams();
 
   const [searchQuery, setSearchQuery] = useState('');
 
   const [recipes, setRecipes] = useState<RecipeDetails[]>([]);
+   
 
   //Handles recipe search functionality on client.
-  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    findRecipe(searchQuery, (data) => setRecipes(data));
+    navigate(`/search/${searchQuery}`);
   };
+
+  //Renders all recipe results.
+  useEffect(() => {
+    if (params.query) {
+      findRecipe(params.query!, (data) => setRecipes(data));
+    }
+  }, [params.query]);
 
 
   return (
     <div className="recipe-search-page">
       <h1>Recipe Search</h1>
-      <div className="search-bar">
+      <form onSubmit={handleSearch} className="search-bar">
         <input
           type="text"
           className="recipe-main-search"
@@ -41,8 +53,8 @@ const Landing = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className="recipe-main-search-btn" onClick={handleSearch}>Search</button>
-      </div>
+        <button type="submit" className="recipe-main-search-btn">Search</button>
+      </form>
 
 
       {
