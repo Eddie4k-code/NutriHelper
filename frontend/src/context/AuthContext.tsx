@@ -1,5 +1,6 @@
 import React, {useState, createContext, useEffect, useContext} from 'react';
 import useCheckUser from '../hooks/useCheckUser';
+import { useNavigate } from 'react-router-dom';
 
  
 //Structure of AuthContext
@@ -25,6 +26,7 @@ export interface AuthContextProviderProps {
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     const [user, setUser] = useState<{id: string, email: string} | null>(null);
     const {checkCurrentUser} = useCheckUser();
+    
 
     //Sets the user state to the current user logging in.
     const authContextLogin = (id:string, email: string) => {

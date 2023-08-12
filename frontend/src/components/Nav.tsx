@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
 
-    const {user} = useAuthContext();
+    
+
+    const {user, logout} = useAuthContext();
 
 
     return (
@@ -16,7 +19,7 @@ const Nav = () => {
 
             <ul className="nav-list">
                 <li className="nav-item">Search</li>
-                {user && <li className="nav-item">Logout</li>}
+                {user && <li className="nav-item" onClick={logout}>Logout</li>}
                 {!user && <li className="nav-item">Login</li>}
                 {!user &&<li className="nav-item">Register</li>}
 
